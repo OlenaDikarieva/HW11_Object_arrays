@@ -58,10 +58,10 @@ function statsHandler() {
     // const min = count>0?shoppingCart.items[count-1].price:0;
  
    // O(n)
-    const minPrice = shoppingCart.items.reduce((min,item) =>item.price < min? item.price:min, shoppingCart.items.length?Number.MAX_VALUE:0);
-    const maxPrice = shoppingCart.items.reduce((max,item) =>item.price > max? item.price:max,o);
+    const min = shoppingCart.items.reduce((min,item) =>item.price < min? item.price:min, shoppingCart.items.length?Number.MAX_VALUE:0);
+    const max = shoppingCart.items.reduce((max,item) =>item.price > max? item.price:max,0);
     //
-    
+
 
     staticdraw(`Count product: ${count}`);
     staticdraw(`Product price: ${shoppingCart.totalCost}`);
@@ -77,6 +77,8 @@ function statsHandler() {
 }
 
 function addHandler() {
+    if ( productName.value.trim()&&price.value.trim()&&quantity.value.trim()) {
+       
     shoppingCart.addItem({
         name: productName.value.trim(),
         price: +price.value.trim(),
@@ -94,6 +96,11 @@ function addHandler() {
         `;
         productList.appendChild(li);
     });
+    productName.value='';
+    price.value='';
+    quantity.value='';
+    
+    }
 }
 
 const item = {
