@@ -51,10 +51,17 @@ function statsHandler() {
         return acc + item.quantity;
     }, 0);
 
-    shoppingCart.items.sort((a,b)=>b.price-a.price);
+    // O(n*log2n) и O(n2) 
+    // shoppingCart.items.sort((a,b)=>b.price-a.price);
+    // 
+    // const max = count>0?shoppingCart.items[0].price:0;
+    // const min = count>0?shoppingCart.items[count-1].price:0;
+ 
+   // O(n)
+    const minPrice = shoppingCart.items.reduce((min,item) =>item.price < min? item.price:min, shoppingCart.items.length?Number.MAX_VALUE:0);
+    const maxPrice = shoppingCart.items.reduce((max,item) =>item.price > max? item.price:max,o);
+    //
     
-    const max = count>0?shoppingCart.items[0].price:0;
-    const min = count>0?shoppingCart.items[count-1].price:0;
 
     staticdraw(`Count product: ${count}`);
     staticdraw(`Product price: ${shoppingCart.totalCost}`);
